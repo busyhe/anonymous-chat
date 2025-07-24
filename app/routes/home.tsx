@@ -40,6 +40,7 @@ export default function Home() {
   const [isEditingName, setIsEditingName] = useState(false);
   const [newName, setNewName] = useState('');
   const [isUploading, setIsUploading] = useState(false);
+  const [previewImageUrl, setPreviewImageUrl] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const nameInputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -200,6 +201,7 @@ export default function Home() {
         return <div className='break-words text-sm'>{message.content}</div>;
       }
       case 'image': {
+        const handleClick = () => setPreviewImageUrl(message.content);
         if (message.metadata) {
           const imageMetadata = message.metadata as {
             width: number;
@@ -212,11 +214,12 @@ export default function Home() {
             <img
               src={message.content}
               alt='图片'
-              className='rounded-md max-w-full max-h-80 object-contain'
+              className='rounded-md max-w-full max-h-80 object-contain cursor-pointer'
               style={{
                 maxWidth: '280px',
                 height: 'auto',
               }}
+              onClick={handleClick}
             />
           );
         }
@@ -224,11 +227,12 @@ export default function Home() {
           <img
             src={message.content}
             alt='图片'
-            className='rounded-md max-w-full max-h-80 object-contain'
+            className='rounded-md max-w-full max-h-80 object-contain cursor-pointer'
             style={{
               maxWidth: '280px',
               height: 'auto',
             }}
+            onClick={handleClick}
           />
         );
       }
@@ -413,6 +417,21 @@ export default function Home() {
         <div className='max-w-4xl mx-auto'>{messages.map(renderMessage)}</div>
         <div ref={messagesEndRef} />
       </div>
+      {/* 图片预览模态框 */}
+      {previewImageUrl && (
+        <div
+          className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70'
+          onClick={() => setPreviewImageUrl(null)}
+        >
+          <img
+            src={previewImageUrl}
+            alt='大图预览'
+            className='max-w-full max-h-full rounded-lg shadow-lg'
+            style={{ cursor: 'zoom-out' }}
+            onClick={e => e.stopPropagation()}
+          />
+        </div>
+      )}
 
       {/* Input Area */}
       <div className='bg-white/90 backdrop-blur-lg shadow-[0_-1px_3px_rgba(0,0,0,0.1)] sticky bottom-0'>
