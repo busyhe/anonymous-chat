@@ -2,6 +2,7 @@
 	"name": "anonymous-chat",
 	"private": true,
 	"type": "module",
+	"version": "1.0.0",
 	"scripts": {
 		"build": "react-router build",
 		"deploy": "npm run build && wrangler deploy",
