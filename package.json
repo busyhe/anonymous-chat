@@ -11,6 +11,7 @@
 		"start": "wrangler dev --experimental-images-local-mode",
 		"typecheck": "wrangler types && react-router typegen && tsc -b",
 		"format": "biome format --write .",
+		"prepare": "lefthook install && git config --local core.editor cat",
 		"release": "LEFTHOOK=0 bumpp package.json"
 	},
 	"dependencies": {
@@ -18,7 +19,6 @@
 		"date-fns": "^4.1.0",
 		"drizzle-orm": "^0.44.3",
 		"isbot": "^5.1.28",
-		"lefthook": "^1.12.2",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
 		"react-router": "^7.7.0",
@@ -30,13 +30,14 @@
 		"@react-router/dev": "^7.7.0",
 		"@tailwindcss/vite": "^4.1.11",
 		"@types/node": "^24.1.0",
-		"@types/react": "^19.1.8",
 		"@types/react-dom": "^19.1.6",
+		"@types/react": "^19.1.8",
 		"drizzle-kit": "^0.31.4",
+		"lefthook": "^1.12.2",
 		"tailwindcss": "^4.1.11",
 		"typescript": "^5.8.3",
-		"vite": "^7.0.6",
 		"vite-tsconfig-paths": "^5.1.4",
+		"vite": "^7.0.6",
 		"wrangler": "^4.25.1"
 	},
 	"pnpm": {
